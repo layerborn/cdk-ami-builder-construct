@@ -21,7 +21,9 @@ exports[`Image Building Tests ImageBuildingSimpleTest 1`] = `
       ],
       "Properties": {
         "Code": {
-          "S3Bucket": "cdk-hnb659fds-assets-265654035060-us-east-2",
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-us-east-2",
+          },
           "S3Key": "f0b8b3b2a005f079c052b61ac9a7d2136835913a896d68c88b70c02423c46047.zip",
         },
         "Description": "CheckStateMachineStatusFunction",
@@ -219,7 +221,7 @@ exports[`Image Building Tests ImageBuildingSimpleTest 1`] = `
             },
           },
         ],
-        "Name": "TestStack-ImageRecipe-92c1e08770f9b5c1980dca8b38feef2f-0-0-1",
+        "Name": "TestStack-ImageRecipe-7e186f0a6f18e689e5b85ff40e35fa89-0-0-1",
         "ParentImage": {
           "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter",
         },
@@ -275,7 +277,9 @@ exports[`Image Building Tests ImageBuildingSimpleTest 1`] = `
       ],
       "Properties": {
         "Code": {
-          "S3Bucket": "cdk-hnb659fds-assets-265654035060-us-east-2",
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-us-east-2",
+          },
           "S3Key": "7382a0addb9f34974a1ea6c6c9b063882af874828f366f5c93b2b7b64db15c94.zip",
         },
         "Description": "AWS CDK resource provider framework - isComplete (TestStack/ImagePipelineTest/ResourceProvider)",
@@ -413,7 +417,9 @@ exports[`Image Building Tests ImageBuildingSimpleTest 1`] = `
       ],
       "Properties": {
         "Code": {
-          "S3Bucket": "cdk-hnb659fds-assets-265654035060-us-east-2",
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-us-east-2",
+          },
           "S3Key": "7382a0addb9f34974a1ea6c6c9b063882af874828f366f5c93b2b7b64db15c94.zip",
         },
         "Description": "AWS CDK resource provider framework - onEvent (TestStack/ImagePipelineTest/ResourceProvider)",
@@ -561,7 +567,9 @@ exports[`Image Building Tests ImageBuildingSimpleTest 1`] = `
       ],
       "Properties": {
         "Code": {
-          "S3Bucket": "cdk-hnb659fds-assets-265654035060-us-east-2",
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-us-east-2",
+          },
           "S3Key": "7382a0addb9f34974a1ea6c6c9b063882af874828f366f5c93b2b7b64db15c94.zip",
         },
         "Description": "AWS CDK resource provider framework - onTimeout (TestStack/ImagePipelineTest/ResourceProvider)",
@@ -893,7 +901,9 @@ exports[`Image Building Tests ImageBuildingSimpleTest 1`] = `
       ],
       "Properties": {
         "Code": {
-          "S3Bucket": "cdk-hnb659fds-assets-265654035060-us-east-2",
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-us-east-2",
+          },
           "S3Key": "73ac5c47f208af373585cef433d22143ed8f8d42b9ef52f164162368102479b8.zip",
         },
         "Description": "StartStateMachineFunction",
@@ -1065,12 +1075,34 @@ exports[`Image Building Tests ImageBuildingSimpleTest 1`] = `
                 {
                   "Action": "imagebuilder:*",
                   "Effect": "Allow",
-                  "Resource": "arn:aws:imagebuilder:us-east-2:265654035060:image-pipeline/teststack-imagepipeline-*",
+                  "Resource": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:aws:imagebuilder:us-east-2:",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":image-pipeline/teststack-imagepipeline-*",
+                      ],
+                    ],
+                  },
                 },
                 {
                   "Action": "imagebuilder:GetImage",
                   "Effect": "Allow",
-                  "Resource": "arn:aws:imagebuilder:us-east-2:265654035060:image/*",
+                  "Resource": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:aws:imagebuilder:us-east-2:",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":image/*",
+                      ],
+                    ],
+                  },
                 },
               ],
               "Version": "2012-10-17",
@@ -1132,7 +1164,11 @@ phases:
                       {
                         "Ref": "AWS::Partition",
                       },
-                      ":iam::265654035060:root",
+                      ":iam::",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":root",
                     ],
                   ],
                 },
@@ -1211,7 +1247,14 @@ phases:
     },
     "VpcPrivateSubnet1Subnet536B997A": {
       "Properties": {
-        "AvailabilityZone": "dummy1a",
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
         "CidrBlock": "17.0.2.0/24",
         "MapPublicIpOnLaunch": false,
         "Tags": [
@@ -1273,7 +1316,14 @@ phases:
     },
     "VpcPrivateSubnet2Subnet3788AAA1": {
       "Properties": {
-        "AvailabilityZone": "dummy1b",
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
         "CidrBlock": "17.0.3.0/24",
         "MapPublicIpOnLaunch": false,
         "Tags": [
@@ -1374,7 +1424,14 @@ phases:
     },
     "VpcPublicSubnet1Subnet5C2D37C4": {
       "Properties": {
-        "AvailabilityZone": "dummy1a",
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
         "CidrBlock": "17.0.0.0/24",
         "MapPublicIpOnLaunch": true,
         "Tags": [
@@ -1439,7 +1496,14 @@ phases:
     },
     "VpcPublicSubnet2Subnet691E08A3": {
       "Properties": {
-        "AvailabilityZone": "dummy1b",
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
         "CidrBlock": "17.0.1.0/24",
         "MapPublicIpOnLaunch": true,
         "Tags": [
