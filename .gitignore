@@ -30,6 +30,10 @@ jspm_packages/
 *.tgz
 .yarn-integrity
 .cache
+cdk.out
+cdk.out/*
+assets
+cdk.context.json
 !/.projenrc.js
 /test-reports/
 junit.xml
@@ -41,6 +45,7 @@ junit.xml
 !/.mergify.yml
 !/.github/workflows/upgrade-main.yml
 !/.github/pull_request_template.md
+!/.npmrc
 !/test/
 !/tsconfig.dev.json
 !/src/
@@ -50,3 +55,8 @@ junit.xml
 .jsii
 tsconfig.json
 !/API.md
+/assets/
+!/src/Lambdas/CheckStateMachineStatus/CheckStateMachineStatus-function.ts
+!/src/Lambdas/ImageBuilderUpdateSsm/ImageBuilderUpdateSsm-function.ts
+!/src/Lambdas/StartStateMachine/StartStateMachine-function.ts
+!/.github/workflows/regression.yml

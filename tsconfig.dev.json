@@ -8,7 +8,8 @@
     "inlineSourceMap": true,
     "inlineSources": true,
     "lib": [
-      "es2019"
+      "es2019",
+      "DOM"
     ],
     "module": "CommonJS",
     "noEmitOnError": false,
@@ -23,12 +24,21 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "stripInternal": true,
-    "target": "ES2019"
+    "target": "ES2019",
+    "rootDir": "."
   },
   "include": [
     ".projenrc.js",
     "src/**/*.ts",
     "test/**/*.ts",
+    "cdk.github.workflows.ts",
+    "src/**/*",
+    "test/**/*",
+    ".projenrc.ts",
+    "cdk.github.workflows.ts",
+    "src/**/*.ts",
+    "test/**/*.ts",
+    "bin/**/*.ts",
     ".projenrc.ts",
     "projenrc/**/*.ts"
   ],
