@@ -24,6 +24,26 @@ jobs:
         run: |-
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
+      - name: Prepare Commit Hash
+        id: prepare_commit_hash
+        run: echo ::set-output name=COMMIT_HASH::$(echo ${GITHUB_SHA} | cut -c1-7)
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.LBIO_DEV_ACCOUNT_ID }}:role/GitHubActions
+          role-duration-seconds: 900
+          aws-region: ${{ secrets.LBIO_DEV_REGION }}
+          role-skip-session-tagging: true
+          role-session-name: ${{ steps.prepare_commit_has.outputs.commit_hash }}
+      - name: Install Task
+        uses: arduino/setup-task@v1
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: install dependencies
+        run: npm install --global yarn
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -93,6 +113,26 @@ jobs:
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
+      - name: Prepare Commit Hash
+        id: prepare_commit_hash
+        run: echo ::set-output name=COMMIT_HASH::$(echo ${GITHUB_SHA} | cut -c1-7)
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.LBIO_DEV_ACCOUNT_ID }}:role/GitHubActions
+          role-duration-seconds: 900
+          aws-region: ${{ secrets.LBIO_DEV_REGION }}
+          role-skip-session-tagging: true
+          role-session-name: ${{ steps.prepare_commit_has.outputs.commit_hash }}
+      - name: Install Task
+        uses: arduino/setup-task@v1
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: install dependencies
+        run: npm install --global yarn
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Prepare Repository
         run: mv dist .repo
       - name: Install Dependencies
@@ -129,6 +169,26 @@ jobs:
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
+      - name: Prepare Commit Hash
+        id: prepare_commit_hash
+        run: echo ::set-output name=COMMIT_HASH::$(echo ${GITHUB_SHA} | cut -c1-7)
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.LBIO_DEV_ACCOUNT_ID }}:role/GitHubActions
+          role-duration-seconds: 900
+          aws-region: ${{ secrets.LBIO_DEV_REGION }}
+          role-skip-session-tagging: true
+          role-session-name: ${{ steps.prepare_commit_has.outputs.commit_hash }}
+      - name: Install Task
+        uses: arduino/setup-task@v1
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: install dependencies
+        run: npm install --global yarn
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Prepare Repository
         run: mv dist .repo
       - name: Install Dependencies
