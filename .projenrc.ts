@@ -30,7 +30,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     },
     {
       name: 'configure aws credentials',
-      uses: 'aws-actions/configure-aws-credentials@v13',
+      uses: 'aws-actions/configure-aws-credentials@v3',
       with: {
         'role-to-assume': 'arn:aws:iam::${{ secrets.LBIO_DEV_ACCOUNT_ID }}:role/GitHubActions',
         'role-duration-seconds': 900,

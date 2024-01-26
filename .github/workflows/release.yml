@@ -28,7 +28,7 @@ jobs:
         id: prepare_commit_hash
         run: echo ::set-output name=COMMIT_HASH::$(echo ${GITHUB_SHA} | cut -c1-7)
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v13
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: arn:aws:iam::${{ secrets.LBIO_DEV_ACCOUNT_ID }}:role/GitHubActions
           role-duration-seconds: 900
@@ -117,7 +117,7 @@ jobs:
         id: prepare_commit_hash
         run: echo ::set-output name=COMMIT_HASH::$(echo ${GITHUB_SHA} | cut -c1-7)
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v13
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: arn:aws:iam::${{ secrets.LBIO_DEV_ACCOUNT_ID }}:role/GitHubActions
           role-duration-seconds: 900
@@ -173,7 +173,7 @@ jobs:
         id: prepare_commit_hash
         run: echo ::set-output name=COMMIT_HASH::$(echo ${GITHUB_SHA} | cut -c1-7)
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v13
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: arn:aws:iam::${{ secrets.LBIO_DEV_ACCOUNT_ID }}:role/GitHubActions
           role-duration-seconds: 900

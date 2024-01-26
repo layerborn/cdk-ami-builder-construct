@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      id-token: write
     outputs:
       patch_created: ${{ steps.create_patch.outputs.patch_created }}
     steps:
@@ -22,7 +23,7 @@ jobs:
         id: prepare_commit_hash
         run: echo ::set-output name=COMMIT_HASH::$(echo ${GITHUB_SHA} | cut -c1-7)
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: arn:aws:iam::${{ secrets.LBIO_DEV_ACCOUNT_ID }}:role/GitHubActions
           role-duration-seconds: 900
