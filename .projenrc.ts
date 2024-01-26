@@ -30,7 +30,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     },
     {
       name: 'configure aws credentials',
-      uses: 'aws-actions/configure-aws-credentials@v1',
+      uses: 'aws-actions/configure-aws-credentials@v13',
       with: {
         'role-to-assume': 'arn:aws:iam::${{ secrets.LBIO_DEV_ACCOUNT_ID }}:role/GitHubActions',
         'role-duration-seconds': 900,
@@ -164,4 +164,8 @@ regressionTests.createWorkflowJob({
   jobName: 'TestStackDistribution',
   taskName: 'Full-Regression-TestStack-Distribution',
 });
+
+project.github!.tryFindWorkflow('build')!.file!.addOverride('jobs.build.permissions.id-token', 'write');
+project.github!.tryFindWorkflow('upgrade-main')!.file!.addOverride('jobs.upgrade.permissions.id-token', 'write');
+
 project.synth();

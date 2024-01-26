@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      id-token: write
     outputs:
       self_mutation_happened: ${{ steps.self_mutation.outputs.self_mutation_happened }}
     env:
@@ -23,7 +24,7 @@ jobs:
         id: prepare_commit_hash
         run: echo ::set-output name=COMMIT_HASH::$(echo ${GITHUB_SHA} | cut -c1-7)
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v13
         with:
           role-to-assume: arn:aws:iam::${{ secrets.LBIO_DEV_ACCOUNT_ID }}:role/GitHubActions
           role-duration-seconds: 900
@@ -124,7 +125,7 @@ jobs:
         id: prepare_commit_hash
         run: echo ::set-output name=COMMIT_HASH::$(echo ${GITHUB_SHA} | cut -c1-7)
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v13
         with:
           role-to-assume: arn:aws:iam::${{ secrets.LBIO_DEV_ACCOUNT_ID }}:role/GitHubActions
           role-duration-seconds: 900
@@ -172,7 +173,7 @@ jobs:
         id: prepare_commit_hash
         run: echo ::set-output name=COMMIT_HASH::$(echo ${GITHUB_SHA} | cut -c1-7)
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v13
         with:
           role-to-assume: arn:aws:iam::${{ secrets.LBIO_DEV_ACCOUNT_ID }}:role/GitHubActions
           role-duration-seconds: 900
