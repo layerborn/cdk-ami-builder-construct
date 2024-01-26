@@ -5,7 +5,7 @@ import { CdkRegressionTestsGitHubWorkflowUbuntu } from './cdk.github.workflows';
 
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Jayson Rawlins',
-  description: 'Creates an EC2 AMI using a Image Builder Pipeline and returns the AMI ID.',
+  description: 'Creates an EC2 AMI using an Image Builder Pipeline and returns the AMI ID.',
   authorAddress: 'jayson.rawlins@layerborn.io',
   packageName: '@layerborn/cdk-ami-builder',
   minNodeVersion: '18.0.0',
@@ -20,7 +20,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   jsiiVersion: '~5.0.0',
   name: '@layerborn/cdk-ami-builder',
   projenrcTs: true,
-  repositoryUrl: 'https://github.com/layerborn/cdk-image-pipeline-construct.git',
+  repositoryUrl: 'https://github.com/layerborn/cdk-ami-builder-construct.git',
   depsUpgrade: true,
   githubOptions: {
     mergify: true,
@@ -28,7 +28,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
   deps: [
     'cdk-iam-floyd',
-    '@layerborn/cdk-aspect-git-tagger',
+    '@layerborn/cdk-git-tagger',
     'aws-cdk-lib@^2.100.0',
     '@matthewbonig/state-machine',
     '@types/node@^18',
@@ -93,15 +93,13 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'assets',
     'cdk.context.json',
     'tsconfig.json',
+    '.dccache',
   ],
   npmAccess: NpmAccess.PUBLIC,
   releaseToNpm: true,
   publishToPypi: {
     distName: 'layerborn.cdk-ami-builder',
     module: 'layerborn.cdk_ami_builder',
-  },
-  publishToGo: {
-    moduleName: 'github.com/layerborn/cdk-ami-builder-go',
   },
 });
 

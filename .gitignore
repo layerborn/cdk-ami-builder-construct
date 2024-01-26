@@ -34,6 +34,7 @@ cdk.out
 cdk.out/*
 assets
 cdk.context.json
+.dccache
 !/.projenrc.js
 /test-reports/
 junit.xml

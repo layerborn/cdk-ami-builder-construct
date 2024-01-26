@@ -2122,10 +2122,10 @@
   dependencies:
     ajv "^8.12.0"
 
-"@layerborn/cdk-aspect-git-tagger@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@layerborn/cdk-aspect-git-tagger/-/cdk-aspect-git-tagger-0.0.2.tgz#c45fd104734566b28108db5b162a1aa6706edd2a"
-  integrity sha512-9AppoAH93gtJfRzB/VrLrV1X/miOV5/jV+DpuPvavSnvYB+diqjuhROsUbRMB5QGcU+KO4rqGd/Ai0SW8jWnpQ==
+"@layerborn/cdk-git-tagger@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@layerborn/cdk-git-tagger/-/cdk-git-tagger-0.0.0.tgz#c91b859bfef1df6a26e2f4c1c4578f878ad24221"
+  integrity sha512-Fbq0S+lu7lvKbh5DT3wIe++vRxL8IdYKXpGyppvfs9dh8oB+8I7VQaFYqKbXuE5/NjDGaWYMXib+jLci+9WhtQ==
 
 "@matthewbonig/state-machine@^0.0.33":
   version "0.0.33"

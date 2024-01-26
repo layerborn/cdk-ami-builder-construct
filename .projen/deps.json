@@ -201,7 +201,7 @@
       "type": "peer"
     },
     {
-      "name": "@layerborn/cdk-aspect-git-tagger",
+      "name": "@layerborn/cdk-git-tagger",
       "type": "runtime"
     },
     {

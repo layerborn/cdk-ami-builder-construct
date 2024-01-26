@@ -2,16 +2,25 @@
 
 ## Overview
 
-The `ImagePipeline` construct is a versatile and powerful component of the AWS Cloud Development Kit (CDK) designed for creating and managing AWS Image Builder pipelines. This construct simplifies the process of setting up automated pipelines for building and maintaining Amazon Machine Images (AMIs). It provides extensive customization options, enabling users to tailor the pipeline to specific needs, including vulnerability scanning, cross-account distribution, and more.
+The `ImagePipeline` construct is a versatile and powerful component of the AWS Cloud Development Kit (CDK) designed for
+creating and managing AWS Image Builder pipelines. This construct simplifies the process of setting up automated
+pipelines for building and maintaining Amazon Machine Images (AMIs). It provides extensive customization options,
+enabling users to tailor the pipeline to specific needs, including vulnerability scanning, cross-account distribution,
+and more.
 
 ## Benefits
 
-1. **Customizable Image Building**: Offers a wide range of parameters to customize the AMI, including VPC settings, security groups, instance types, and more.
-2. **Automated Pipeline Management**: Automates the pipeline creation and execution process, reducing manual effort and potential errors.
-3. **Cross-Account AMI Distribution**: Facilitates the copying of AMIs to multiple AWS accounts, enhancing resource sharing and collaboration.
-4. **Vulnerability Scanning Integration**: Supports integration with AWS Inspector for continuous vulnerability scanning, ensuring security compliance.
+1. **Customizable Image Building**: Offers a wide range of parameters to customize the AMI, including VPC settings,
+   security groups, instance types, and more.
+2. **Automated Pipeline Management**: Automates the pipeline creation and execution process, reducing manual effort and
+   potential errors.
+3. **Cross-Account AMI Distribution**: Facilitates the copying of AMIs to multiple AWS accounts, enhancing resource
+   sharing and collaboration.
+4. **Vulnerability Scanning Integration**: Supports integration with AWS Inspector for continuous vulnerability
+   scanning, ensuring security compliance.
 5. **User-Friendly**: Designed with user experience in mind, making it easy to integrate into AWS CDK projects.
-6. **Scalability and Flexibility**: Scales according to your needs and provides flexibility in configuring various aspects of the image building process.
+6. **Scalability and Flexibility**: Scales according to your needs and provides flexibility in configuring various
+   aspects of the image building process.
 
 ## Prerequisites
 
@@ -30,7 +39,7 @@ npm install -g aws-cdk
 Next, add the `ImagePipeline` construct to your CDK project:
 
 ```bash
-npm install your-image-pipeline-package-name
+npm install '@layerborn/cdk-ami-builder' --save
 ```
 
 ## Usage Example
@@ -42,7 +51,7 @@ Below is an example of how to use the `ImagePipeline` construct in your CDK appl
 First, import the `ImagePipeline` construct into your CDK application:
 
 ```typescript
-import { ImagePipeline } from 'your-image-pipeline-package-name';
+import { ImagePipeline } from '@layerborn/cdk-ami-builder';
 ```
 
 ### Using the Construct
@@ -51,68 +60,68 @@ Here's an example of how to use the `ImagePipeline` construct:
 
 ```typescript
 const vpc = new Vpc(this, 'Vpc', {
-      ipAddresses: IpAddresses.cidr(props.vpcCidr as string),
-      maxAzs: 2,
-      subnetConfiguration: [
+    ipAddresses: IpAddresses.cidr(props.vpcCidr as string),
+    maxAzs: 2,
+    subnetConfiguration: [
         {
-          name: 'Public',
-          subnetType: SubnetType.PUBLIC,
-          cidrMask: 24,
+            name: 'Public',
+            subnetType: SubnetType.PUBLIC,
+            cidrMask: 24,
         },
         {
-          name: 'Private',
-          subnetType: SubnetType.PRIVATE_WITH_EGRESS,
-          cidrMask: 24,
+            name: 'Private',
+            subnetType: SubnetType.PRIVATE_WITH_EGRESS,
+            cidrMask: 24,
         },
-      ],
-      natGateways: 1,
-    });
+    ],
+    natGateways: 1,
+});
 
-    const image = ec2.MachineImage.lookup({
-      name: 'ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*',
-      owners: ['099720109477'],
-    });
+const image = ec2.MachineImage.lookup({
+    name: 'ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*',
+    owners: ['099720109477'],
+});
 
-    const version = process.env.IMAGE_VERSION_NUMBER ?? '0.0.8';
+const version = process.env.IMAGE_VERSION_NUMBER ?? '0.0.8';
 
-    const imagePipeline = new ImagePipeline(this, 'ImagePipeline', {
-      parentImage: image.getImage(this).imageId,
-      vpc: vpc,
-      imageRecipeVersion: version,
-      autoBuild: true, // Otherwise you can't use the below output
-      components: [
+const imagePipeline = new ImagePipeline(this, 'ImagePipeline', {
+    parentImage: image.getImage(this).imageId,
+    vpc: vpc,
+    imageRecipeVersion: version,
+    autoBuild: true, // Otherwise you can't use the below output
+    components: [
         {
-          name: 'Install-Monitoring',
-          platform: 'Linux',
-          componentDocument: {
-            phases: [{
-              name: 'build',
-              steps: [
-                {
-                  name: 'Install-CloudWatch-Agent',
-                  action: 'ExecuteBash',
-                  inputs: {
-                    commands: [
-                      'apt-get update',
-                      'DEBIAN_FRONTEND=noninteractive apt-get install -y g++ make cmake unzip libcur14-openssl-dev',
-                      'DEBIAN_FRONTEND=noninteractive apt-get install -y curl sudo jq bash zip unzip iptables software-properties-common ca-certificates',
-                      'curl -sfLo /tmp/amazon-cloudwatch-agent.deb https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb',
-                      'dpkg -i -E /tmp/amazon-cloudwatch-agent.deb',
-                      'rm /tmp/amazon-cloudwatch-agent.deb',
+            name: 'Install-Monitoring',
+            platform: 'Linux',
+            componentDocument: {
+                phases: [{
+                    name: 'build',
+                    steps: [
+                        {
+                            name: 'Install-CloudWatch-Agent',
+                            action: 'ExecuteBash',
+                            inputs: {
+                                commands: [
+                                    'apt-get update',
+                                    'DEBIAN_FRONTEND=noninteractive apt-get install -y g++ make cmake unzip libcur14-openssl-dev',
+                                    'DEBIAN_FRONTEND=noninteractive apt-get install -y curl sudo jq bash zip unzip iptables software-properties-common ca-certificates',
+                                    'curl -sfLo /tmp/amazon-cloudwatch-agent.deb https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb',
+                                    'dpkg -i -E /tmp/amazon-cloudwatch-agent.deb',
+                                    'rm /tmp/amazon-cloudwatch-agent.deb',
+                                ],
+                            },
+                        },
                     ],
-                  },
-                },
-              ],
-            }],
-          },
+                }],
+            },
         },
-      ],
-    });
+    ],
+});
 
-    new CfnOutput(this, `ImageId-${this.stackName}`, {
-      value: imagePipeline.imageId,  // Only valid if autoBuild=true
-      description: 'The AMI ID of the image created by the pipeline',
-    });
+new CfnOutput(this, `ImageId-${this.stackName}`, {
+    value: imagePipeline.imageId,  // Only valid if autoBuild=true
+    description: 'The AMI ID of the image created by the pipeline',
+});
 ```
 
 This example demonstrates creating a new VPC and setting up an Image Pipeline within it. You can customize the `
@@ -128,7 +137,8 @@ ImagePipeline` properties according to your requirements.
 
 ### Outputs
 
-The construct provides outputs like `imagePipelineArn` and `imageId`, which can be used in other parts of your AWS infrastructure setup.
+The construct provides outputs like `imagePipelineArn` and `imageId`, which can be used in other parts of your AWS
+infrastructure setup.
 
 ## Best Practices
 
@@ -139,15 +149,13 @@ The construct provides outputs like `imagePipelineArn` and `imageId`, which can 
 
 ## Support and Contribution
 
-For support, please contact the package maintainer or open an issue in the repository. Contributions to the package are welcome. Please follow the contribution guidelines in the repository.
+For support, please contact the package maintainer or open an issue in the repository. Contributions to the package are
+welcome. Please follow the contribution guidelines in the repository.
 
 ------
 
-This README provides a basic guide to getting started with the `ImagePipeline` construct. For more advanced usage and customization, refer to the detailed documentation in the package.
-
-
-
-
+This README provides a basic guide to getting started with the `ImagePipeline` construct. For more advanced usage and
+customization, refer to the detailed documentation in the package.
 
 ![User](https://lh3.googleusercontent.com/a/AEdFTp6yNsN1-EC5-OZ2vss91NDDYmHKgEHn8xwdd6eS=s96-c)
 

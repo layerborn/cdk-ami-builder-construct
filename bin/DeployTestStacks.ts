@@ -10,6 +10,7 @@ new ImageBuilderTestStack(app, 'ImageBuildTestStack', {
     account: process.env.AWS_ACCOUNT,
     region: process.env.AWS_REGION,
   },
+  version: process.env.IMAGE_VERSION_NUMBER ?? '1.0.0',
 });
 
 
@@ -22,8 +23,7 @@ new ImageBuilderTestStack(app, 'ImageBuildShareImagesTestStack', {
   distributionAccountIds: process.env.DISTRIBUTION_ACCOUNT_IDS?.split(','),
   distributionRegions: process.env.DISTRIBUTION_REGIONS?.split(','),
   distributionKmsKeyAlias: 'alias/ec2-image-builder',
-  version: '0.0.20',
-  debugImagePipeline: true,
+  version: process.env.IMAGE_VERSION_NUMBER ?? '1.0.0',
 });
 
 app.synth();
