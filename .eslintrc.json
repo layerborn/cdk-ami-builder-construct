@@ -148,6 +148,10 @@
         "devDependencies": [
           "**/test/**",
           "**/build-tools/**",
+          "src/Lambdas/CheckStateMachineStatus/CheckStateMachineStatus.lambda.ts",
+          "src/Lambdas/ImageBuilderUpdateSsm/ImageBuilderUpdateSsm.lambda.ts",
+          "src/Lambdas/StartStateMachine/StartStateMachine.lambda.ts",
+          "./cdk.github.workflows.ts",
           ".projenrc.ts",
           "projenrc/**/*.ts"
         ],
