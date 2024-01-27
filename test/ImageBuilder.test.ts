@@ -86,6 +86,18 @@ describe('Image Building Tests', () => {
         return `"${sval}"`;
       },
     });
+    const recipeMatch = new RegExp(/[\w\d]+-ImageRecipe-[a-fA-F0-9]{20,40}-[\d]-[\d]-[\d]/);
+    const recipeName = 'TestStack-ImageRecipe-3a999ee333d4f4b8959821499f063ec6-0-0-1';
+    expect.addSnapshotSerializer({
+      test: (val) => typeof val === 'string'
+                && (val.match(recipeMatch) != null),
+      print: (val) => {
+        // Substitute both the bucket part and the asset zip part
+        let sval = `${val}`;
+        sval = sval.replace(recipeMatch, recipeName);
+        return `"${sval}"`;
+      },
+    });
 
     expect(template).toMatchSnapshot();
 
