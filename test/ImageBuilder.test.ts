@@ -11,8 +11,8 @@ describe('Image Building Tests', () => {
     const testStack = new Stack(app, 'TestStack',
       {
         env: {
-          account: process.env.AWS_ACCOUNT,
-          region: process.env.AWS_REGION,
+          account: '5555555555',
+          region: 'eu-central-1',
         },
       });
     const vpc = new Vpc(testStack, 'Vpc', {
