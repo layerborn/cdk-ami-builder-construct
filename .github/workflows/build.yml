@@ -107,7 +107,8 @@ jobs:
   package-js:
     needs: build
     runs-on: ubuntu-latest
-    permissions: {}
+    permissions:
+      id-token: write
     if: "! needs.build.outputs.self_mutation_happened"
     steps:
       - uses: actions/setup-node@v3
@@ -152,7 +153,8 @@ jobs:
   package-python:
     needs: build
     runs-on: ubuntu-latest
-    permissions: {}
+    permissions:
+      id-token: write
     if: "! needs.build.outputs.self_mutation_happened"
     steps:
       - uses: actions/setup-node@v3
