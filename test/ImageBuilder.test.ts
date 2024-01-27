@@ -1,6 +1,6 @@
 import { App, Stack } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
-import { AmazonLinuxEdition, AmazonLinuxGeneration, AmazonLinuxImage, IpAddresses, SubnetType, Vpc } from 'aws-cdk-lib/aws-ec2';
+import { IpAddresses, SubnetType, Vpc } from 'aws-cdk-lib/aws-ec2';
 import { ImagePipeline } from '../src';
 
 describe('Image Building Tests', () => {
@@ -33,13 +33,8 @@ describe('Image Building Tests', () => {
       natGateways: 1,
     });
 
-    const image = new AmazonLinuxImage({
-      generation: AmazonLinuxGeneration.AMAZON_LINUX_2,
-      edition: AmazonLinuxEdition.STANDARD,
-    });
-
     new ImagePipeline(testStack, 'ImagePipelineTest', {
-      parentImage: image.getImage(testStack).imageId,
+      parentImage: 'ami-09694bfab577e90b0',
       vpc: vpc,
       components: [
         {

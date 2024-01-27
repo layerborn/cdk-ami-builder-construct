@@ -8,10 +8,6 @@ exports[`Image Building Tests ImageBuildingSimpleTest 1`] = `
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter": {
-      "Default": "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2",
-      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
-    },
   },
   "Resources": {
     "ImagePipelineTestCheckStateMachineStatusFunctionC5041832": {
@@ -221,10 +217,8 @@ exports[`Image Building Tests ImageBuildingSimpleTest 1`] = `
             },
           },
         ],
-        "Name": "TestStack-ImageRecipe-9e5f52f03581445d0f148cb575f7e563-0-0-1",
-        "ParentImage": {
-          "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter",
-        },
+        "Name": "TestStack-ImageRecipe-92c1e08770f9b5c1980dca8b38feef2f-0-0-1",
+        "ParentImage": "ami-09694bfab577e90b0",
         "Version": "0.0.1",
       },
       "Type": "AWS::ImageBuilder::ImageRecipe",
