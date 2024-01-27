@@ -66,6 +66,28 @@ describe('Image Building Tests', () => {
     });
 
     const template = Template.fromStack(testStack);
-    expect(template.toJSON()).toMatchSnapshot();
+    // Expected patterns
+    const account = '5555555555';
+    const region = 'eu-central-1';
+    const bucketMatch = new RegExp(`cdk-[0-9a-z]{9}-assets-${account}-${region}`);
+    const assetMatch = /[0-9a-f]{64}\.zip/;
+    const assetBucket = 'cdk-123456789-assets-5555555555-eu-central-1';
+    const assetKey = '1234567890123456789012345678901234567890123456789012345678901234.zip';
+
+    expect.addSnapshotSerializer({
+      test: (val) => typeof val === 'string'
+                && (val.match(bucketMatch) != null
+                    || val.match(assetMatch) != null),
+      print: (val) => {
+        // Substitute both the bucket part and the asset zip part
+        let sval = `${val}`;
+        sval = sval.replace(bucketMatch, assetBucket);
+        sval = sval.replace(assetMatch, assetKey);
+        return `"${sval}"`;
+      },
+    });
+
+    expect(template).toMatchSnapshot();
+
   });
 });
