@@ -1,4 +1,5 @@
-import { awscdk } from 'projen';
+import { awscdk, github } from 'projen';
+import { GithubCredentials } from 'projen/lib/github';
 import { NpmAccess } from 'projen/lib/javascript';
 import { CdkRegressionTestsGitHubWorkflowUbuntu } from './cdk.github.workflows';
 
@@ -6,6 +7,7 @@ import { CdkRegressionTestsGitHubWorkflowUbuntu } from './cdk.github.workflows';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Jayson Rawlins',
   description: 'Creates an EC2 AMI using an Image Builder Pipeline and returns the AMI ID.',
+  keywords: ['ami', 'imagebuilder', 'image builder', 'ec2'],
   authorAddress: 'jayson.rawlins@layerborn.io',
   packageName: '@layerborn/cdk-ami-builder',
   minNodeVersion: '18.0.0',
@@ -21,7 +23,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   name: '@layerborn/cdk-ami-builder',
   projenrcTs: true,
   repositoryUrl: 'https://github.com/layerborn/cdk-ami-builder-construct.git',
-  depsUpgrade: true,
   workflowBootstrapSteps: [
     {
       name: 'Prepare Commit Hash',
@@ -60,7 +61,26 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ],
   githubOptions: {
     mergify: true,
-    mergifyOptions: {},
+    pullRequestLint: true,
+    projenCredentials: GithubCredentials.fromApp({
+      permissions: {
+        pullRequests: github.workflows.AppPermission.WRITE,
+        contents: github.workflows.AppPermission.WRITE,
+        workflows: github.workflows.AppPermission.WRITE,
+      },
+    }),
+  },
+  depsUpgrade: true,
+  depsUpgradeOptions: {
+    workflowOptions: {
+      projenCredentials: GithubCredentials.fromApp({
+        permissions: {
+          pullRequests: github.workflows.AppPermission.WRITE,
+          contents: github.workflows.AppPermission.WRITE,
+          workflows: github.workflows.AppPermission.WRITE,
+        },
+      }),
+    },
   },
   deps: [
     'cdk-iam-floyd',
