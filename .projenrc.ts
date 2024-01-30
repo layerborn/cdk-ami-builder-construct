@@ -83,12 +83,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
     },
   },
   deps: [
-    'cdk-iam-floyd',
-    '@layerborn/cdk-git-tagger',
     'aws-cdk-lib@^2.100.0',
     '@matthewbonig/state-machine',
     '@types/node@^18',
     'crypto-js',
+    '@layerborn/cdk-iam-policy-builder-helper',
   ],
   devDeps: [
     'aws-cdk-lib@^2.100.0',
@@ -156,6 +155,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
   publishToPypi: {
     distName: 'layerborn.cdk-ami-builder',
     module: 'layerborn.cdk_ami_builder',
+  },
+  publishToGo: {
+    moduleName: 'github.com/layerborn/cdk-ami-builder-construct',
   },
 });
 

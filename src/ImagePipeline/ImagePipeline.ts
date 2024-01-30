@@ -1,7 +1,10 @@
 import * as fs from 'fs';
 import * as path from 'node:path';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Actions } from '@layerborn/cdk-iam-policy-builder-helper';
 import { StateMachine } from '@matthewbonig/state-machine';
 import {
+  Arn,
   aws_iam as iam,
   aws_imagebuilder as imagebuilder,
   aws_sns as sns,
@@ -16,7 +19,6 @@ import { Vpc } from 'aws-cdk-lib/aws-ec2';
 import { Role } from 'aws-cdk-lib/aws-iam';
 import { Key } from 'aws-cdk-lib/aws-kms';
 import { Provider } from 'aws-cdk-lib/custom-resources';
-import * as floyd from 'cdk-iam-floyd';
 import { Construct } from 'constructs';
 import * as CryptoJS from 'crypto-js';
 import * as yaml from 'js-yaml';
@@ -480,12 +482,31 @@ export class ImagePipeline extends Construct {
         memorySize: 128,
         timeout: Duration.minutes(12),
         initialPolicy: [
-          new floyd.States().allow().toStartExecution().onAllResources(),
-          new floyd.Imagebuilder().allow().toListImagePipelines().onAllResources(),
-          new floyd.Imagebuilder().allow().toStartImagePipelineExecution().onAllResources(),
-          new floyd.States().allow().toDescribeExecution().onAllResources(),
-          new floyd.States().allow().toListExecutions().onAllResources(),
-          new floyd.Kms().allow().allActions().onAlias('alias/aws/ebs'),
+          new iam.PolicyStatement({
+            effect: iam.Effect.ALLOW,
+            actions: [
+              Actions.states.StartExecution,
+              Actions.imagebuilder.ListImagePipelines,
+              Actions.imagebuilder.StartImagePipelineExecution,
+              Actions.states.DescribeExecution,
+              Actions.states.ListExecutions,
+            ],
+            resources: ['*'],
+          }),
+          new iam.PolicyStatement({
+            effect: iam.Effect.ALLOW,
+            actions: [
+              'kms:*',
+            ],
+            // arn:{partition}:{service}:{region}:{account}:{resource}{sep}{resource-name}/
+            resources: [Arn.format({
+              service: 'kms',
+              resource: 'alias/aws/ebs',
+              account: '*',
+              region: '*',
+              partition: 'aws',
+            })],
+          }),
         ],
       });
 
@@ -494,13 +515,31 @@ export class ImagePipeline extends Construct {
       memorySize: 128,
       timeout: Duration.minutes(12),
       initialPolicy: [
-        new floyd.States().allow().toGetExecutionHistory().onAllResources(),
-        new floyd.Imagebuilder().allow().toListImagePipelines().onAllResources(),
-        new floyd.Imagebuilder().allow().toStartImagePipelineExecution().onAllResources(),
-        new floyd.States().allow().toDescribeExecution().onAllResources(),
-        new floyd.States().allow().toListExecutions().onAllResources(),
-        new floyd.Ec2().allow().toModifyImageAttribute().onAllResources(),
-        new floyd.Kms().allow().allActions().onAlias('alias/aws/ebs'),
+        new iam.PolicyStatement({
+          effect: iam.Effect.ALLOW,
+          actions: [
+            Actions.states.GetExecutionHistory,
+            Actions.imagebuilder.ListImagePipelines,
+            Actions.imagebuilder.StartImagePipelineExecution,
+            Actions.states.DescribeExecution,
+            Actions.states.ListExecutions,
+            Actions.ec2.ModifyImageAttribute,
+          ],
+          resources: ['*'],
+        }),
+        new iam.PolicyStatement({
+          effect: iam.Effect.ALLOW,
+          actions: [
+            'kms:*',
+          ],
+          resources: [Arn.format({
+            service: 'kms',
+            resource: 'alias/aws/ebs',
+            account: '*',
+            region: '*',
+            partition: 'aws',
+          })],
+        }),
       ],
     });
 
@@ -519,13 +558,30 @@ export class ImagePipeline extends Construct {
       inlinePolicies: {
         StateMachinePolicy: new iam.PolicyDocument({
           statements: [
-            new floyd.Xray().allow()
-              .toPutTraceSegments()
-              .toPutTelemetryRecords()
-              .toGetSamplingRules()
-              .toGetSamplingTargets(),
-            new floyd.Imagebuilder().allow().allActions().on(`arn:aws:imagebuilder:${region ?? '*'}:${account ?? '*'}:image-pipeline/${pipelineBaseName.toLowerCase()}-*`),
-            new floyd.Imagebuilder().allow().toGetImage().on(`arn:aws:imagebuilder:${region ?? '*'}:${account ?? '*'}:image/*`),
+            new iam.PolicyStatement({
+              effect: iam.Effect.ALLOW,
+              actions: [
+                Actions.xray.PutTraceSegments,
+                Actions.xray.PutTelemetryRecords,
+                Actions.xray.GetSamplingRules,
+                Actions.xray.GetSamplingTargets,
+              ],
+              resources: ['*'],
+            }),
+            new iam.PolicyStatement({
+              effect: iam.Effect.ALLOW,
+              actions: [
+                'imagebuilder:*',
+              ],
+              resources: [`arn:aws:imagebuilder:${region ?? '*'}:${account ?? '*'}:image-pipeline/${pipelineBaseName.toLowerCase()}-*`],
+            }),
+            new iam.PolicyStatement({
+              effect: iam.Effect.ALLOW,
+              actions: [
+                Actions.imagebuilder.GetImage,
+              ],
+              resources: [`arn:aws:imagebuilder:${region ?? '*'}:${account ?? '*'}:image/*`],
+            }),
           ],
         }),
       },
