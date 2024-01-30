@@ -195,7 +195,8 @@
       "description": "Runs eslint against the codebase",
       "steps": [
         {
-          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern src test build-tools projenrc .projenrc.ts"
+          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern $@ src test build-tools projenrc .projenrc.ts",
+          "receiveArgs": true
         }
       ]
     },
@@ -348,28 +349,13 @@
       },
       "steps": [
         {
-          "exec": "yarn upgrade npm-check-updates"
-        },
-        {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='constructs,jsii-rosetta,jsii'"
-        },
-        {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='constructs,jsii-rosetta,jsii'"
-        },
-        {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='constructs,jsii-rosetta,jsii'"
-        },
-        {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='constructs,jsii-rosetta,jsii'"
-        },
-        {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='constructs,jsii-rosetta,jsii'"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/crypto-js,@types/jest,@types/js-yaml,@types/lodash.merge,@types/node,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,aws-cdk-lib,aws-cdk,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,eslint,jest,jest-junit,jsii-diff,jsii-docgen,jsii-pacmak,projen,standard-version,ts-jest,ts-node,typescript,@aws-sdk/client-ec2,@aws-sdk/client-ecs,@aws-sdk/client-kms,@aws-sdk/client-s3,@aws-sdk/client-secrets-manager,@aws-sdk/client-sfn,@aws-sdk/client-sns,@aws-sdk/client-sqs,@aws-sdk/client-ssm,@types/aws-lambda,crypto-js,js-yaml,lodash.merge,constructs,@layerborn/cdk-git-tagger,@matthewbonig/state-machine,cdk-iam-floyd"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @types/crypto-js @types/jest @types/js-yaml @types/lodash.merge @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk-lib aws-cdk constructs esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii npm-check-updates projen standard-version ts-jest ts-node typescript @aws-sdk/client-ec2 @aws-sdk/client-ecs @aws-sdk/client-kms @aws-sdk/client-s3 @aws-sdk/client-secrets-manager @aws-sdk/client-sfn @aws-sdk/client-sns @aws-sdk/client-sqs @aws-sdk/client-ssm @types/aws-lambda @types/crypto-js @types/js-yaml @types/node crypto-js js-yaml lodash.merge aws-cdk-lib constructs @layerborn/cdk-git-tagger @matthewbonig/state-machine @types/node aws-cdk-lib cdk-iam-floyd crypto-js"
+          "exec": "yarn upgrade @types/crypto-js @types/jest @types/js-yaml @types/lodash.merge @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk-lib aws-cdk esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak projen standard-version ts-jest ts-node typescript @aws-sdk/client-ec2 @aws-sdk/client-ecs @aws-sdk/client-kms @aws-sdk/client-s3 @aws-sdk/client-secrets-manager @aws-sdk/client-sfn @aws-sdk/client-sns @aws-sdk/client-sqs @aws-sdk/client-ssm @types/aws-lambda crypto-js js-yaml lodash.merge constructs @layerborn/cdk-git-tagger @matthewbonig/state-machine cdk-iam-floyd"
         },
         {
           "exec": "npx projen"
