@@ -212,6 +212,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      id-token: write
     if: needs.release.outputs.latest_commit == github.sha
     steps:
       - uses: actions/setup-node@v3

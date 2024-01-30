@@ -194,4 +194,5 @@ project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release.perm
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_github.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_npm.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_pypi.permissions.id-token', 'write');
+project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_golang.permissions.id-token', 'write');
 project.synth();
