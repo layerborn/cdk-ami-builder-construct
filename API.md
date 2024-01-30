@@ -2363,7 +2363,7 @@ const checkStateMachineStatusFunctionProps: CheckStateMachineStatusFunctionProps
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.insightsVersion">insightsVersion</a></code> | <code>aws-cdk-lib.aws_lambda.LambdaInsightsVersion</code> | Specify the version of CloudWatch Lambda insights to use for monitoring. |
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.layers">layers</a></code> | <code>aws-cdk-lib.aws_lambda.ILayerVersion[]</code> | A list of layers to add to the function's execution environment. |
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logFormat">logFormat</a></code> | <code>string</code> | Sets the logFormat for the function. |
-| <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logGroup">logGroup</a></code> | <code>aws-cdk-lib.aws_logs.ILogGroup</code> | Sets the log group name for the function. |
+| <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logGroup">logGroup</a></code> | <code>aws-cdk-lib.aws_logs.ILogGroup</code> | The log group the function sends logs to. |
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetention">logRetention</a></code> | <code>aws-cdk-lib.aws_logs.RetentionDays</code> | The number of days log events are kept in CloudWatch Logs. |
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetentionRetryOptions">logRetentionRetryOptions</a></code> | <code>aws-cdk-lib.aws_lambda.LogRetentionRetryOptions</code> | When log retention is specified, a custom resource attempts to create the CloudWatch log group. |
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetentionRole">logRetentionRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The IAM role for the Lambda function associated with the custom resource that sets the retention policy. |
@@ -2500,7 +2500,7 @@ public readonly applicationLogLevel: string;
 ```
 
 - *Type:* string
-- *Default:* INFO
+- *Default:* "INFO"
 
 Sets the application log level for the function.
 
@@ -2743,7 +2743,7 @@ public readonly logFormat: string;
 ```
 
 - *Type:* string
-- *Default:* Text format
+- *Default:* "Text"
 
 Sets the logFormat for the function.
 
@@ -2756,13 +2756,28 @@ public readonly logGroup: ILogGroup;
 ```
 
 - *Type:* aws-cdk-lib.aws_logs.ILogGroup
-- *Default:* `/aws/lambda/${this.functionName}` default log group name created by Lambda
+- *Default:* `/aws/lambda/${this.functionName}` - default log group created by Lambda
 
-Sets the log group name for the function.
+The log group the function sends logs to.
+
+By default, Lambda functions send logs to an automatically created default log group named /aws/lambda/\<function name\>.
+However you cannot change the properties of this auto-created log group using the AWS CDK, e.g. you cannot set a different log retention.
+
+Use the `logGroup` property to create a fully customizable LogGroup ahead of time, and instruct the Lambda function to send logs to it.
 
 ---
 
-##### `logRetention`<sup>Optional</sup> <a name="logRetention" id="@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetention"></a>
+##### ~~`logRetention`~~<sup>Optional</sup> <a name="logRetention" id="@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetention"></a>
+
+- *Deprecated:* instead create a fully customizable log group with `logs.LogGroup` and use the `logGroup` property to instruct the Lambda function to send logs to it.
+Migrating from `logRetention` to `logGroup` will cause the name of the log group to change.
+Users and code and referencing the name verbatim will have to adjust.
+
+In AWS CDK code, you can access the log group name directly from the LogGroup construct:
+```ts
+declare const myLogGroup: logs.LogGroup;
+myLogGroup.logGroupName;
+```
 
 ```typescript
 public readonly logRetention: RetentionDays;
@@ -2779,7 +2794,9 @@ remove the retention policy, set the value to `INFINITE`.
 
 ---
 
-##### `logRetentionRetryOptions`<sup>Optional</sup> <a name="logRetentionRetryOptions" id="@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetentionRetryOptions"></a>
+##### ~~`logRetentionRetryOptions`~~<sup>Optional</sup> <a name="logRetentionRetryOptions" id="@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetentionRetryOptions"></a>
+
+- *Deprecated:* instead use `logGroup` to create a fully customizable log group and instruct the Lambda function to send logs to it.
 
 ```typescript
 public readonly logRetentionRetryOptions: LogRetentionRetryOptions;
@@ -2794,7 +2811,9 @@ These options control the retry policy when interacting with CloudWatch APIs.
 
 ---
 
-##### `logRetentionRole`<sup>Optional</sup> <a name="logRetentionRole" id="@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetentionRole"></a>
+##### ~~`logRetentionRole`~~<sup>Optional</sup> <a name="logRetentionRole" id="@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetentionRole"></a>
+
+- *Deprecated:* instead use `logGroup` to create a fully customizable log group and instruct the Lambda function to send logs to it.
 
 ```typescript
 public readonly logRetentionRole: IRole;
@@ -2957,7 +2976,7 @@ public readonly systemLogLevel: string;
 ```
 
 - *Type:* string
-- *Default:* INFO
+- *Default:* "INFO"
 
 Sets the system log level for the function.
 
@@ -3368,7 +3387,7 @@ const startStateMachineFunctionProps: StartStateMachineFunctionProps = { ... }
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.insightsVersion">insightsVersion</a></code> | <code>aws-cdk-lib.aws_lambda.LambdaInsightsVersion</code> | Specify the version of CloudWatch Lambda insights to use for monitoring. |
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.layers">layers</a></code> | <code>aws-cdk-lib.aws_lambda.ILayerVersion[]</code> | A list of layers to add to the function's execution environment. |
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logFormat">logFormat</a></code> | <code>string</code> | Sets the logFormat for the function. |
-| <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logGroup">logGroup</a></code> | <code>aws-cdk-lib.aws_logs.ILogGroup</code> | Sets the log group name for the function. |
+| <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logGroup">logGroup</a></code> | <code>aws-cdk-lib.aws_logs.ILogGroup</code> | The log group the function sends logs to. |
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetention">logRetention</a></code> | <code>aws-cdk-lib.aws_logs.RetentionDays</code> | The number of days log events are kept in CloudWatch Logs. |
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetentionRetryOptions">logRetentionRetryOptions</a></code> | <code>aws-cdk-lib.aws_lambda.LogRetentionRetryOptions</code> | When log retention is specified, a custom resource attempts to create the CloudWatch log group. |
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetentionRole">logRetentionRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The IAM role for the Lambda function associated with the custom resource that sets the retention policy. |
@@ -3505,7 +3524,7 @@ public readonly applicationLogLevel: string;
 ```
 
 - *Type:* string
-- *Default:* INFO
+- *Default:* "INFO"
 
 Sets the application log level for the function.
 
@@ -3748,7 +3767,7 @@ public readonly logFormat: string;
 ```
 
 - *Type:* string
-- *Default:* Text format
+- *Default:* "Text"
 
 Sets the logFormat for the function.
 
@@ -3761,13 +3780,28 @@ public readonly logGroup: ILogGroup;
 ```
 
 - *Type:* aws-cdk-lib.aws_logs.ILogGroup
-- *Default:* `/aws/lambda/${this.functionName}` default log group name created by Lambda
+- *Default:* `/aws/lambda/${this.functionName}` - default log group created by Lambda
 
-Sets the log group name for the function.
+The log group the function sends logs to.
+
+By default, Lambda functions send logs to an automatically created default log group named /aws/lambda/\<function name\>.
+However you cannot change the properties of this auto-created log group using the AWS CDK, e.g. you cannot set a different log retention.
+
+Use the `logGroup` property to create a fully customizable LogGroup ahead of time, and instruct the Lambda function to send logs to it.
 
 ---
 
-##### `logRetention`<sup>Optional</sup> <a name="logRetention" id="@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetention"></a>
+##### ~~`logRetention`~~<sup>Optional</sup> <a name="logRetention" id="@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetention"></a>
+
+- *Deprecated:* instead create a fully customizable log group with `logs.LogGroup` and use the `logGroup` property to instruct the Lambda function to send logs to it.
+Migrating from `logRetention` to `logGroup` will cause the name of the log group to change.
+Users and code and referencing the name verbatim will have to adjust.
+
+In AWS CDK code, you can access the log group name directly from the LogGroup construct:
+```ts
+declare const myLogGroup: logs.LogGroup;
+myLogGroup.logGroupName;
+```
 
 ```typescript
 public readonly logRetention: RetentionDays;
@@ -3784,7 +3818,9 @@ remove the retention policy, set the value to `INFINITE`.
 
 ---
 
-##### `logRetentionRetryOptions`<sup>Optional</sup> <a name="logRetentionRetryOptions" id="@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetentionRetryOptions"></a>
+##### ~~`logRetentionRetryOptions`~~<sup>Optional</sup> <a name="logRetentionRetryOptions" id="@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetentionRetryOptions"></a>
+
+- *Deprecated:* instead use `logGroup` to create a fully customizable log group and instruct the Lambda function to send logs to it.
 
 ```typescript
 public readonly logRetentionRetryOptions: LogRetentionRetryOptions;
@@ -3799,7 +3835,9 @@ These options control the retry policy when interacting with CloudWatch APIs.
 
 ---
 
-##### `logRetentionRole`<sup>Optional</sup> <a name="logRetentionRole" id="@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetentionRole"></a>
+##### ~~`logRetentionRole`~~<sup>Optional</sup> <a name="logRetentionRole" id="@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetentionRole"></a>
+
+- *Deprecated:* instead use `logGroup` to create a fully customizable log group and instruct the Lambda function to send logs to it.
 
 ```typescript
 public readonly logRetentionRole: IRole;
@@ -3962,7 +4000,7 @@ public readonly systemLogLevel: string;
 ```
 
 - *Type:* string
-- *Default:* INFO
+- *Default:* "INFO"
 
 Sets the system log level for the function.
 

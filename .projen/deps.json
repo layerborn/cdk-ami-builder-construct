@@ -201,11 +201,7 @@
       "type": "peer"
     },
     {
-      "name": "@layerborn/cdk-git-tagger",
-      "type": "runtime"
-    },
-    {
-      "name": "@matthewbonig/state-machine",
+      "name": "@layerborn/cdk-iam-policy-builder-helper",
       "type": "runtime"
     },
     {
@@ -216,10 +212,6 @@
     {
       "name": "aws-cdk-lib",
       "version": "^2.100.0",
-      "type": "runtime"
-    },
-    {
-      "name": "cdk-iam-floyd",
       "type": "runtime"
     },
     {

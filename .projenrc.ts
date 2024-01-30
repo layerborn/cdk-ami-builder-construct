@@ -83,12 +83,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
     },
   },
   deps: [
-    'cdk-iam-floyd',
-    '@layerborn/cdk-git-tagger',
     'aws-cdk-lib@^2.100.0',
-    '@matthewbonig/state-machine',
     '@types/node@^18',
     'crypto-js',
+    '@layerborn/cdk-iam-policy-builder-helper',
   ],
   devDeps: [
     'aws-cdk-lib@^2.100.0',
@@ -157,6 +155,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
     distName: 'layerborn.cdk-ami-builder',
     module: 'layerborn.cdk_ami_builder',
   },
+  publishToGo: {
+    moduleName: 'github.com/layerborn/cdk-ami-builder-construct',
+  },
 });
 
 project.eslint!.allowDevDeps('./cdk.github.workflows.ts');
@@ -188,9 +189,11 @@ regressionTests.createWorkflowJob({
 project.github!.tryFindWorkflow('build')!.file!.addOverride('jobs.build.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('build')!.file!.addOverride('jobs.package-js.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('build')!.file!.addOverride('jobs.package-python.permissions.id-token', 'write');
+project.github!.tryFindWorkflow('build')!.file!.addOverride('jobs.release_go.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('upgrade-main')!.file!.addOverride('jobs.upgrade.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_github.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_npm.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_pypi.permissions.id-token', 'write');
+project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_golang.permissions.id-token', 'write');
 project.synth();
