@@ -254,3 +254,6 @@ jobs:
         run: cd .repo && npx projen package:go
       - name: Collect go Artifact
         run: mv .repo/dist dist
+  release_go:
+    permissions:
+      id-token: write
