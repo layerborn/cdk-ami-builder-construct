@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'node:path';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Actions } from '@layerborn/cdk-iam-policy-builder-helper';
-import { StateMachine } from '@matthewbonig/state-machine';
+
 import {
   Arn,
   aws_iam as iam,
@@ -24,6 +24,7 @@ import * as CryptoJS from 'crypto-js';
 import * as yaml from 'js-yaml';
 import { CheckStateMachineStatusFunction } from '../Lambdas/CheckStateMachineStatus/CheckStateMachineStatus-function';
 import { StartStateMachineFunction } from '../Lambdas/StartStateMachine/StartStateMachine-function';
+import { StateMachine } from '../StateMachine';
 
 export interface IEbsParameters {
   /**

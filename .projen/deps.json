@@ -205,10 +205,6 @@
       "type": "runtime"
     },
     {
-      "name": "@matthewbonig/state-machine",
-      "type": "runtime"
-    },
-    {
       "name": "@types/node",
       "version": "^18",
       "type": "runtime"

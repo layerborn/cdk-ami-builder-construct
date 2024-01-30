@@ -24,6 +24,7 @@
     "eslint": "npx projen eslint",
     "package": "npx projen package",
     "package-all": "npx projen package-all",
+    "package:go": "npx projen package:go",
     "package:js": "npx projen package:js",
     "package:python": "npx projen package:python",
     "post-compile": "npx projen post-compile",
@@ -87,7 +88,6 @@
     "@aws-sdk/client-sqs": "^3.502.0",
     "@aws-sdk/client-ssm": "^3.502.0",
     "@layerborn/cdk-iam-policy-builder-helper": "^0.0.0",
-    "@matthewbonig/state-machine": "^0.0.33",
     "@types/aws-lambda": "^8.10.133",
     "@types/crypto-js": "^4.2.2",
     "@types/js-yaml": "^4.0.9",
@@ -179,6 +179,9 @@
       "python": {
         "distName": "layerborn.cdk-ami-builder",
         "module": "layerborn.cdk_ami_builder"
+      },
+      "go": {
+        "moduleName": "github.com/layerborn/cdk-ami-builder-construct"
       }
     },
     "tsc": {

@@ -84,7 +84,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
   deps: [
     'aws-cdk-lib@^2.100.0',
-    '@matthewbonig/state-machine',
     '@types/node@^18',
     'crypto-js',
     '@layerborn/cdk-iam-policy-builder-helper',

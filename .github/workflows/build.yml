@@ -206,3 +206,51 @@ jobs:
         run: cd .repo && npx projen package:python
       - name: Collect python Artifact
         run: mv .repo/dist dist
+  package-go:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions: {}
+    if: "! needs.build.outputs.self_mutation_happened"
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.0.0
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ^1.16.0
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifact
+          path: dist
+      - name: Restore build artifact permissions
+        run: cd dist && setfacl --restore=permissions-backup.acl
+        continue-on-error: true
+      - name: Prepare Commit Hash
+        id: prepare_commit_hash
+        run: echo ::set-output name=COMMIT_HASH::$(echo ${GITHUB_SHA} | cut -c1-7)
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.LBIO_DEV_ACCOUNT_ID }}:role/GitHubActions
+          role-duration-seconds: 900
+          aws-region: ${{ secrets.LBIO_DEV_REGION }}
+          role-skip-session-tagging: true
+          role-session-name: ${{ steps.prepare_commit_has.outputs.commit_hash }}
+      - name: Install Task
+        uses: arduino/setup-task@v1
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: install dependencies
+        run: npm install --global yarn
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Prepare Repository
+        run: mv dist .repo
+      - name: Install Dependencies
+        run: cd .repo && yarn install --check-files --frozen-lockfile
+      - name: Create go artifact
+        run: cd .repo && npx projen package:go
+      - name: Collect go Artifact
+        run: mv .repo/dist dist
