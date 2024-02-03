@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@types/crypto-js": "^4.2.2",
-    "@types/jest": "^29.5.11",
+    "@types/jest": "^29.5.12",
     "@types/js-yaml": "^4.0.9",
     "@types/lodash.merge": "^4.6.9",
     "@types/node": "^18",
@@ -62,7 +62,7 @@
     "jest-junit": "^15",
     "jsii": "~5.0.0",
     "jsii-diff": "^1.94.0",
-    "jsii-docgen": "^10.3.13",
+    "jsii-docgen": "^10.3.14",
     "jsii-pacmak": "^1.94.0",
     "jsii-rosetta": "~5.0.0",
     "projen": "^0.71.34",
