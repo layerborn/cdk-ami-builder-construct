@@ -196,4 +196,7 @@ project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_gith
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_npm.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_pypi.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_golang.permissions.id-token', 'write');
+
+project.postCompileTask.exec('rm tsconfig.json');
+
 project.synth();
