@@ -85,7 +85,7 @@
     "@aws-sdk/client-sns": "^3.504.0",
     "@aws-sdk/client-sqs": "^3.504.0",
     "@aws-sdk/client-ssm": "^3.504.0",
-    "@layerborn/cdk-iam-policy-builder-helper": "^0.0.1",
+    "@layerborn/cdk-iam-policy-builder-helper": "^0.0.2",
     "@types/aws-lambda": "^8.10.133",
     "@types/crypto-js": "^4.2.2",
     "@types/js-yaml": "^4.0.9",
