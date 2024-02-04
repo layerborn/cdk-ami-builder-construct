@@ -2765,12 +2765,19 @@ However you cannot change the properties of this auto-created log group using th
 
 Use the `logGroup` property to create a fully customizable LogGroup ahead of time, and instruct the Lambda function to send logs to it.
 
-Providing a user-controlled log group was rolled out to commercial regions on 2023-11-16.
-If you are deploying to another type of region, please check regional availability first.
-
 ---
 
-##### `logRetention`<sup>Optional</sup> <a name="logRetention" id="@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetention"></a>
+##### ~~`logRetention`~~<sup>Optional</sup> <a name="logRetention" id="@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetention"></a>
+
+- *Deprecated:* instead create a fully customizable log group with `logs.LogGroup` and use the `logGroup` property to instruct the Lambda function to send logs to it.
+Migrating from `logRetention` to `logGroup` will cause the name of the log group to change.
+Users and code and referencing the name verbatim will have to adjust.
+
+In AWS CDK code, you can access the log group name directly from the LogGroup construct:
+```ts
+declare const myLogGroup: logs.LogGroup;
+myLogGroup.logGroupName;
+```
 
 ```typescript
 public readonly logRetention: RetentionDays;
@@ -2785,23 +2792,11 @@ When updating
 this property, unsetting it doesn't remove the log retention policy. To
 remove the retention policy, set the value to `INFINITE`.
 
-This is a legacy API and we strongly recommend you move away from it if you can.
-Instead create a fully customizable log group with `logs.LogGroup` and use the `logGroup` property
-to instruct the Lambda function to send logs to it.
-Migrating from `logRetention` to `logGroup` will cause the name of the log group to change.
-Users and code and referencing the name verbatim will have to adjust.
-
-In AWS CDK code, you can access the log group name directly from the LogGroup construct:
-```ts
-import * as logs from 'aws-cdk-lib/aws-logs';
-
-declare const myLogGroup: logs.LogGroup;
-myLogGroup.logGroupName;
-```
-
 ---
 
-##### `logRetentionRetryOptions`<sup>Optional</sup> <a name="logRetentionRetryOptions" id="@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetentionRetryOptions"></a>
+##### ~~`logRetentionRetryOptions`~~<sup>Optional</sup> <a name="logRetentionRetryOptions" id="@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetentionRetryOptions"></a>
+
+- *Deprecated:* instead use `logGroup` to create a fully customizable log group and instruct the Lambda function to send logs to it.
 
 ```typescript
 public readonly logRetentionRetryOptions: LogRetentionRetryOptions;
@@ -2814,12 +2809,11 @@ When log retention is specified, a custom resource attempts to create the CloudW
 
 These options control the retry policy when interacting with CloudWatch APIs.
 
-This is a legacy API and we strongly recommend you migrate to `logGroup` if you can.
-`logGroup` allows you to create a fully customizable log group and instruct the Lambda function to send logs to it.
-
 ---
 
-##### `logRetentionRole`<sup>Optional</sup> <a name="logRetentionRole" id="@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetentionRole"></a>
+##### ~~`logRetentionRole`~~<sup>Optional</sup> <a name="logRetentionRole" id="@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetentionRole"></a>
+
+- *Deprecated:* instead use `logGroup` to create a fully customizable log group and instruct the Lambda function to send logs to it.
 
 ```typescript
 public readonly logRetentionRole: IRole;
@@ -2829,9 +2823,6 @@ public readonly logRetentionRole: IRole;
 - *Default:* A new role is created.
 
 The IAM role for the Lambda function associated with the custom resource that sets the retention policy.
-
-This is a legacy API and we strongly recommend you migrate to `logGroup` if you can.
-`logGroup` allows you to create a fully customizable log group and instruct the Lambda function to send logs to it.
 
 ---
 
@@ -3798,12 +3789,19 @@ However you cannot change the properties of this auto-created log group using th
 
 Use the `logGroup` property to create a fully customizable LogGroup ahead of time, and instruct the Lambda function to send logs to it.
 
-Providing a user-controlled log group was rolled out to commercial regions on 2023-11-16.
-If you are deploying to another type of region, please check regional availability first.
-
 ---
 
-##### `logRetention`<sup>Optional</sup> <a name="logRetention" id="@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetention"></a>
+##### ~~`logRetention`~~<sup>Optional</sup> <a name="logRetention" id="@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetention"></a>
+
+- *Deprecated:* instead create a fully customizable log group with `logs.LogGroup` and use the `logGroup` property to instruct the Lambda function to send logs to it.
+Migrating from `logRetention` to `logGroup` will cause the name of the log group to change.
+Users and code and referencing the name verbatim will have to adjust.
+
+In AWS CDK code, you can access the log group name directly from the LogGroup construct:
+```ts
+declare const myLogGroup: logs.LogGroup;
+myLogGroup.logGroupName;
+```
 
 ```typescript
 public readonly logRetention: RetentionDays;
@@ -3818,23 +3816,11 @@ When updating
 this property, unsetting it doesn't remove the log retention policy. To
 remove the retention policy, set the value to `INFINITE`.
 
-This is a legacy API and we strongly recommend you move away from it if you can.
-Instead create a fully customizable log group with `logs.LogGroup` and use the `logGroup` property
-to instruct the Lambda function to send logs to it.
-Migrating from `logRetention` to `logGroup` will cause the name of the log group to change.
-Users and code and referencing the name verbatim will have to adjust.
-
-In AWS CDK code, you can access the log group name directly from the LogGroup construct:
-```ts
-import * as logs from 'aws-cdk-lib/aws-logs';
-
-declare const myLogGroup: logs.LogGroup;
-myLogGroup.logGroupName;
-```
-
 ---
 
-##### `logRetentionRetryOptions`<sup>Optional</sup> <a name="logRetentionRetryOptions" id="@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetentionRetryOptions"></a>
+##### ~~`logRetentionRetryOptions`~~<sup>Optional</sup> <a name="logRetentionRetryOptions" id="@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetentionRetryOptions"></a>
+
+- *Deprecated:* instead use `logGroup` to create a fully customizable log group and instruct the Lambda function to send logs to it.
 
 ```typescript
 public readonly logRetentionRetryOptions: LogRetentionRetryOptions;
@@ -3847,12 +3833,11 @@ When log retention is specified, a custom resource attempts to create the CloudW
 
 These options control the retry policy when interacting with CloudWatch APIs.
 
-This is a legacy API and we strongly recommend you migrate to `logGroup` if you can.
-`logGroup` allows you to create a fully customizable log group and instruct the Lambda function to send logs to it.
-
 ---
 
-##### `logRetentionRole`<sup>Optional</sup> <a name="logRetentionRole" id="@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetentionRole"></a>
+##### ~~`logRetentionRole`~~<sup>Optional</sup> <a name="logRetentionRole" id="@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetentionRole"></a>
+
+- *Deprecated:* instead use `logGroup` to create a fully customizable log group and instruct the Lambda function to send logs to it.
 
 ```typescript
 public readonly logRetentionRole: IRole;
@@ -3862,9 +3847,6 @@ public readonly logRetentionRole: IRole;
 - *Default:* A new role is created.
 
 The IAM role for the Lambda function associated with the custom resource that sets the retention policy.
-
-This is a legacy API and we strongly recommend you migrate to `logGroup` if you can.
-`logGroup` allows you to create a fully customizable log group and instruct the Lambda function to send logs to it.
 
 ---
 
