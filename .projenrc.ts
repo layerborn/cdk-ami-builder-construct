@@ -37,7 +37,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
         'role-duration-seconds': 900,
         'aws-region': '${{ secrets.LBIO_DEV_REGION }}',
         'role-skip-session-tagging': true,
-        'role-session-name': '${{ steps.prepare_commit_has.outputs.commit_hash }}',
+        'role-session-name': '${{ steps.prepare_commit_hash.outputs.COMMIT_HASH }}',
       },
     },
     {
@@ -196,4 +196,7 @@ project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_gith
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_npm.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_pypi.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_golang.permissions.id-token', 'write');
+
+project.eslint!.allowDevDeps('cdk.github.workflows.ts');
+project.postCompileTask.exec('rm tsconfig.json');
 project.synth();

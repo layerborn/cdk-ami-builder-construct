@@ -23,12 +23,12 @@
     },
     {
       "name": "@typescript-eslint/eslint-plugin",
-      "version": "^6",
+      "version": "^5",
       "type": "build"
     },
     {
       "name": "@typescript-eslint/parser",
-      "version": "^6",
+      "version": "^5",
       "type": "build"
     },
     {
@@ -42,7 +42,16 @@
       "type": "build"
     },
     {
+      "name": "constructs",
+      "version": "10.1.203",
+      "type": "build"
+    },
+    {
       "name": "esbuild",
+      "type": "build"
+    },
+    {
+      "name": "eslint-import-resolver-node",
       "type": "build"
     },
     {
@@ -87,6 +96,11 @@
     {
       "name": "jsii",
       "version": "~5.0.0",
+      "type": "build"
+    },
+    {
+      "name": "npm-check-updates",
+      "version": "^16",
       "type": "build"
     },
     {

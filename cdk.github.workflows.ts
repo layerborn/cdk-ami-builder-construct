@@ -50,7 +50,7 @@ export class CdkRegressionTestsGitHubWorkflowUbuntu {
             'role-duration-seconds': 3600,
             'aws-region': '${{ secrets.LBIO_DEV_REGION }}',
             'role-skip-session-tagging': true,
-            'role-session-name': '${{ steps.prepare_commit_hash.outputs.prepare_commit_hash.COMMIT_HASH }}',
+            'role-session-name': '${{ steps.prepare_commit_hash.outputs.COMMIT_HASH }}',
           },
         },
         {
