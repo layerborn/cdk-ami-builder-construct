@@ -37,7 +37,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
         'role-duration-seconds': 900,
         'aws-region': '${{ secrets.LBIO_DEV_REGION }}',
         'role-skip-session-tagging': true,
-        'role-session-name': '${{ steps.prepare_commit_has.outputs.commit_hash }}',
+        'role-session-name': '${{ steps.prepare_commit_hash.outputs.COMMIT_HASH }}',
       },
     },
     {
