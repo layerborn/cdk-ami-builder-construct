@@ -43,7 +43,7 @@
     },
     {
       "name": "constructs",
-      "version": "10.1.203",
+      "version": "10.3.0",
       "type": "build"
     },
     {
@@ -197,11 +197,12 @@
     },
     {
       "name": "constructs",
-      "version": "^10.1.203",
+      "version": "^10.3.0",
       "type": "peer"
     },
     {
       "name": "@layerborn/cdk-iam-policy-builder-helper",
+      "version": "^0.0.4",
       "type": "runtime"
     },
     {
