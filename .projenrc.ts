@@ -12,7 +12,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   packageName: '@layerborn/cdk-ami-builder',
   minNodeVersion: '18.0.0',
   cdkVersion: '2.100.0',
-  constructsVersion: '10.1.203',
+  constructsVersion: '10.3.0',
   lambdaOptions: {
     runtime: awscdk.LambdaRuntime.NODEJS_18_X,
   },
@@ -86,7 +86,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'aws-cdk-lib@^2.100.0',
     '@types/node@^18',
     'crypto-js',
-    '@layerborn/cdk-iam-policy-builder-helper',
+    '@layerborn/cdk-iam-policy-builder-helper@^0.0.4',
   ],
   devDeps: [
     'aws-cdk-lib@^2.100.0',
