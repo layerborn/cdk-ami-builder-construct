@@ -4,9 +4,8 @@ import * as aws_stepfunctions from 'aws-cdk-lib/aws-stepfunctions';
 import { DefinitionBody, LogOptions, StateMachineType } from 'aws-cdk-lib/aws-stepfunctions';
 import { Construct } from 'constructs';
 import * as yaml from 'js-yaml';
-
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-import merge = require('lodash.merge');
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { merge } from 'lodash';
 
 
 export interface StateMachineProps {
@@ -95,4 +94,3 @@ export class StateMachine extends aws_stepfunctions.StateMachine {
     });
   }
 }
-
