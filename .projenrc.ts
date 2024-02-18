@@ -1,7 +1,6 @@
 import { awscdk, github } from 'projen';
 import { GithubCredentials } from 'projen/lib/github';
 import { NpmAccess } from 'projen/lib/javascript';
-import { CdkRegressionTestsGitHubWorkflowUbuntu } from './cdk.github.workflows';
 
 
 const project = new awscdk.AwsCdkConstructLibrary({
@@ -132,7 +131,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
       'cdk.github.workflows.ts',
       'src/**/*.ts',
       'test/**/*.ts',
-      'bin/**/*.ts',
     ],
     exclude: [],
     compilerOptions: {
@@ -160,32 +158,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
 });
 
-project.eslint!.allowDevDeps('./cdk.github.workflows.ts');
-
-const regressionTests = new CdkRegressionTestsGitHubWorkflowUbuntu(project.github!, {
-  workflowName: 'regression',
-});
-
-regressionTests.cdkGitHubWorkflow.on({
-  workflowDispatch: {
-    inputs: {
-      deployment: {
-        type: 'choice',
-        description: 'Start Regression Tests',
-        required: true,
-        options: [
-          'TestStackDistribution',
-        ],
-      },
-    },
-  },
-});
-
-regressionTests.createWorkflowJob({
-  jobName: 'TestStackDistribution',
-  taskName: 'Full-Regression-TestStack-Distribution',
-});
-
 project.github!.tryFindWorkflow('build')!.file!.addOverride('jobs.build.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('build')!.file!.addOverride('jobs.package-js.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('build')!.file!.addOverride('jobs.package-python.permissions.id-token', 'write');
@@ -197,6 +169,7 @@ project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_npm.
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_pypi.permissions.id-token', 'write');
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_golang.permissions.id-token', 'write');
 
-project.eslint!.allowDevDeps('cdk.github.workflows.ts');
 project.postCompileTask.exec('rm tsconfig.json');
+
+
 project.synth();

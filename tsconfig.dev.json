@@ -28,6 +28,7 @@
     "rootDir": "."
   },
   "include": [
+    ".projenrc.js",
     "src/**/*.ts",
     "test/**/*.ts",
     "cdk.github.workflows.ts",
@@ -37,7 +38,6 @@
     "cdk.github.workflows.ts",
     "src/**/*.ts",
     "test/**/*.ts",
-    "bin/**/*.ts",
     ".projenrc.ts",
     "projenrc/**/*.ts"
   ],

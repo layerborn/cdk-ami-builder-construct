@@ -2363,6 +2363,7 @@ const checkStateMachineStatusFunctionProps: CheckStateMachineStatusFunctionProps
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.insightsVersion">insightsVersion</a></code> | <code>aws-cdk-lib.aws_lambda.LambdaInsightsVersion</code> | Specify the version of CloudWatch Lambda insights to use for monitoring. |
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.layers">layers</a></code> | <code>aws-cdk-lib.aws_lambda.ILayerVersion[]</code> | A list of layers to add to the function's execution environment. |
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logFormat">logFormat</a></code> | <code>string</code> | Sets the logFormat for the function. |
+| <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.loggingFormat">loggingFormat</a></code> | <code>aws-cdk-lib.aws_lambda.LoggingFormat</code> | Sets the loggingFormat for the function. |
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logGroup">logGroup</a></code> | <code>aws-cdk-lib.aws_logs.ILogGroup</code> | The log group the function sends logs to. |
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetention">logRetention</a></code> | <code>aws-cdk-lib.aws_logs.RetentionDays</code> | The number of days log events are kept in CloudWatch Logs. |
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logRetentionRetryOptions">logRetentionRetryOptions</a></code> | <code>aws-cdk-lib.aws_lambda.LogRetentionRetryOptions</code> | When log retention is specified, a custom resource attempts to create the CloudWatch log group. |
@@ -2746,6 +2747,19 @@ public readonly logFormat: string;
 - *Default:* "Text"
 
 Sets the logFormat for the function.
+
+---
+
+##### `loggingFormat`<sup>Optional</sup> <a name="loggingFormat" id="@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.loggingFormat"></a>
+
+```typescript
+public readonly loggingFormat: LoggingFormat;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.LoggingFormat
+- *Default:* LoggingFormat.TEXT
+
+Sets the loggingFormat for the function.
 
 ---
 
@@ -3396,6 +3410,7 @@ const startStateMachineFunctionProps: StartStateMachineFunctionProps = { ... }
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.insightsVersion">insightsVersion</a></code> | <code>aws-cdk-lib.aws_lambda.LambdaInsightsVersion</code> | Specify the version of CloudWatch Lambda insights to use for monitoring. |
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.layers">layers</a></code> | <code>aws-cdk-lib.aws_lambda.ILayerVersion[]</code> | A list of layers to add to the function's execution environment. |
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logFormat">logFormat</a></code> | <code>string</code> | Sets the logFormat for the function. |
+| <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.loggingFormat">loggingFormat</a></code> | <code>aws-cdk-lib.aws_lambda.LoggingFormat</code> | Sets the loggingFormat for the function. |
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logGroup">logGroup</a></code> | <code>aws-cdk-lib.aws_logs.ILogGroup</code> | The log group the function sends logs to. |
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetention">logRetention</a></code> | <code>aws-cdk-lib.aws_logs.RetentionDays</code> | The number of days log events are kept in CloudWatch Logs. |
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logRetentionRetryOptions">logRetentionRetryOptions</a></code> | <code>aws-cdk-lib.aws_lambda.LogRetentionRetryOptions</code> | When log retention is specified, a custom resource attempts to create the CloudWatch log group. |
@@ -3779,6 +3794,19 @@ public readonly logFormat: string;
 - *Default:* "Text"
 
 Sets the logFormat for the function.
+
+---
+
+##### `loggingFormat`<sup>Optional</sup> <a name="loggingFormat" id="@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.loggingFormat"></a>
+
+```typescript
+public readonly loggingFormat: LoggingFormat;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.LoggingFormat
+- *Default:* LoggingFormat.TEXT
+
+Sets the loggingFormat for the function.
 
 ---
 
