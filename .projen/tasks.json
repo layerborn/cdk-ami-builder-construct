@@ -364,13 +364,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/crypto-js,@types/jest,@types/js-yaml,@types/lodash.merge,@types/node,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,aws-cdk-lib,aws-cdk,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,eslint,jest,jest-junit,jsii-diff,jsii-docgen,jsii-pacmak,projen,standard-version,ts-jest,ts-node,typescript,@aws-sdk/client-ec2,@aws-sdk/client-ecs,@aws-sdk/client-kms,@aws-sdk/client-s3,@aws-sdk/client-secrets-manager,@aws-sdk/client-sfn,@aws-sdk/client-sns,@aws-sdk/client-sqs,@aws-sdk/client-ssm,@types/aws-lambda,crypto-js,js-yaml,lodash.merge,constructs,@layerborn/cdk-iam-policy-builder-helper"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/crypto-js,@types/jest,@types/js-yaml,@types/lodash.merge,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-docgen,jsii-pacmak,jsii-rosetta,jsii,ts-jest,ts-node,typescript,@aws-sdk/client-ec2,@aws-sdk/client-ecs,@aws-sdk/client-kms,@aws-sdk/client-s3,@aws-sdk/client-secrets-manager,@aws-sdk/client-sfn,@aws-sdk/client-sns,@aws-sdk/client-sqs,@aws-sdk/client-ssm,@types/aws-lambda,crypto-js,js-yaml,lodash.merge"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @types/crypto-js @types/jest @types/js-yaml @types/lodash.merge @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk-lib aws-cdk esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak projen standard-version ts-jest ts-node typescript @aws-sdk/client-ec2 @aws-sdk/client-ecs @aws-sdk/client-kms @aws-sdk/client-s3 @aws-sdk/client-secrets-manager @aws-sdk/client-sfn @aws-sdk/client-sns @aws-sdk/client-sqs @aws-sdk/client-ssm @types/aws-lambda crypto-js js-yaml lodash.merge constructs @layerborn/cdk-iam-policy-builder-helper"
+          "exec": "yarn upgrade @types/crypto-js @types/jest @types/js-yaml @types/lodash.merge @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk-lib aws-cdk esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen standard-version ts-jest ts-node typescript @aws-sdk/client-ec2 @aws-sdk/client-ecs @aws-sdk/client-kms @aws-sdk/client-s3 @aws-sdk/client-secrets-manager @aws-sdk/client-sfn @aws-sdk/client-sns @aws-sdk/client-sqs @aws-sdk/client-ssm @types/aws-lambda crypto-js js-yaml lodash.merge constructs @layerborn/cdk-iam-policy-builder-helper"
         },
         {
           "exec": "npx projen"
