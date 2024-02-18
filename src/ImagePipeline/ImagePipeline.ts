@@ -288,10 +288,6 @@ export class ImagePipeline extends Construct {
       : (props.distributionKmsKeyAlias ?? 'alias/aws/ebs');
     const distributionAccountIds = props.distributionAccountIds ?? [];
     const distributionRegions = props.distributionRegions ?? [];
-    console.log(`distributionAccountIds: ${props.distributionAccountIds?.join(',')}`);
-    console.log(`distributionRegions: ${props.distributionRegions}`);
-    console.log(`Distribution KMS Key Alias is ${props.distributionKmsKeyAlias}`);
-    console.log(`Effective KMS Key Alias is ${ebsVolumeEffectiveKmsAlias}`);
 
     if ((props.distributionRegions?.length === 0 && props.distributionAccountIds?.length) ||
             (props.distributionRegions?.length && props.distributionAccountIds?.length === 0)) {
@@ -394,7 +390,6 @@ export class ImagePipeline extends Construct {
         ],
       };
     }
-    console.log(`BlockDevice Mappings: ${JSON.stringify(imageRecipeProps.blockDeviceMappings)}`);
     imageRecipe = new imagebuilder.CfnImageRecipe(this, 'ImageRecipe', imageRecipeProps);
 
     props.components.forEach((component: IComponentProps, index: number) => {
@@ -596,7 +591,7 @@ export class ImagePipeline extends Construct {
     });
 
     const effectiveRemovalPolicy = props.debugImagePipeline === true ? RemovalPolicy.RETAIN_ON_UPDATE_OR_DELETE : RemovalPolicy.DESTROY;
-    console.log(`effectiveRemovalPolicy: ${effectiveRemovalPolicy}`);
+
     const componentsHash = this.stringToMD5(JSON.stringify(props.components));
     const imagePipeline = new CustomResource(this, 'CustomResource',
       {
