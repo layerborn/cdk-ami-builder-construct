@@ -52,7 +52,7 @@
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
     "aws-cdk": "^2.100.0",
-    "aws-cdk-lib": "^2.100.0",
+    "aws-cdk-lib": "^2.129.0",
     "constructs": "10.3.0",
     "esbuild": "^0.20.0",
     "eslint": "^8",
@@ -92,7 +92,7 @@
     "@types/crypto-js": "^4.2.2",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^18",
-    "aws-cdk-lib": "^2.100.0",
+    "aws-cdk-lib": "^2.129.0",
     "crypto-js": "^4.2.0",
     "js-yaml": "^4.1.0",
     "lodash.merge": "^4.6.2"
