@@ -685,6 +685,22 @@ exports[`Image Building Tests ImageBuildingSimpleTest 1`] = `
             ],
           ],
         },
+        "LoggingConfiguration": {
+          "Destinations": [
+            {
+              "CloudWatchLogsLogGroup": {
+                "LogGroupArn": {
+                  "Fn::GetAtt": [
+                    "ImagePipelineTestResourceProviderwaiterstatemachineLogGroupDF98BE60",
+                    "Arn",
+                  ],
+                },
+              },
+            },
+          ],
+          "IncludeExecutionData": false,
+          "Level": "ERROR",
+        },
         "RoleArn": {
           "Fn::GetAtt": [
             "ImagePipelineTestResourceProviderwaiterstatemachineRole14260CDF",
@@ -693,6 +709,26 @@ exports[`Image Building Tests ImageBuildingSimpleTest 1`] = `
         },
       },
       "Type": "AWS::StepFunctions::StateMachine",
+    },
+    "ImagePipelineTestResourceProviderwaiterstatemachineLogGroupDF98BE60": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/vendedlogs/states/waiter-state-machine-",
+              {
+                "Ref": "ImagePipelineTestResourceProviderframeworkisComplete7EAC489D",
+              },
+              "-c88eb7cd7ccc62ef9a247d27e593f9fec2b175acd8",
+            ],
+          ],
+        },
+        "RetentionInDays": 731,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
     },
     "ImagePipelineTestResourceProviderwaiterstatemachineRole14260CDF": {
       "Properties": {
@@ -766,6 +802,22 @@ exports[`Image Building Tests ImageBuildingSimpleTest 1`] = `
                   ],
                 },
               ],
+            },
+            {
+              "Action": [
+                "logs:CreateLogDelivery",
+                "logs:CreateLogStream",
+                "logs:GetLogDelivery",
+                "logs:UpdateLogDelivery",
+                "logs:DeleteLogDelivery",
+                "logs:ListLogDeliveries",
+                "logs:PutLogEvents",
+                "logs:PutResourcePolicy",
+                "logs:DescribeResourcePolicies",
+                "logs:DescribeLogGroups",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
             },
           ],
           "Version": "2012-10-17",

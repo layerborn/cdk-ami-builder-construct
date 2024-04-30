@@ -3,22 +3,28 @@ import { GithubCredentials } from 'projen/lib/github';
 import { NpmAccess } from 'projen/lib/javascript';
 
 
+const cdkVersion = '2.130.0';
+const minNodeVersion = '18.0.0';
+const constructsVersion = '10.3.0';
+const projenVersion = '^0.71.34';
+const jsiiVersion = '~5.0.0';
+
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Jayson Rawlins',
   description: 'Creates an EC2 AMI using an Image Builder Pipeline and returns the AMI ID.',
   keywords: ['ami', 'imagebuilder', 'image builder', 'ec2'],
   authorAddress: 'jayson.rawlins@layerborn.io',
   packageName: '@layerborn/cdk-ami-builder',
-  minNodeVersion: '18.0.0',
-  cdkVersion: '2.100.0',
-  constructsVersion: '10.3.0',
+  minNodeVersion: minNodeVersion,
+  cdkVersion: cdkVersion,
+  constructsVersion: constructsVersion,
   lambdaOptions: {
     runtime: awscdk.LambdaRuntime.NODEJS_18_X,
   },
   defaultReleaseBranch: 'main',
-  projenVersion: '^0.71.34',
+  projenVersion: projenVersion,
   license: 'Apache-2.0',
-  jsiiVersion: '~5.0.0',
+  jsiiVersion: jsiiVersion,
   name: '@layerborn/cdk-ami-builder',
   projenrcTs: true,
   repositoryUrl: 'https://github.com/layerborn/cdk-ami-builder-construct.git',
@@ -60,7 +66,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ],
   githubOptions: {
     mergify: true,
-    pullRequestLint: true,
+    pullRequestLint: false,
     projenCredentials: GithubCredentials.fromApp({
       permissions: {
         pullRequests: github.workflows.AppPermission.WRITE,
@@ -82,14 +88,14 @@ const project = new awscdk.AwsCdkConstructLibrary({
     },
   },
   deps: [
-    'aws-cdk-lib@^2.100.0',
+    `aws-cdk-lib@^${cdkVersion}`,
     '@types/node@^18',
     'crypto-js',
     '@layerborn/cdk-iam-policy-builder-helper@^0.0.4',
   ],
   devDeps: [
-    'aws-cdk-lib@^2.100.0',
-    'aws-cdk@^2.100.0',
+    `aws-cdk-lib@^${cdkVersion}`,
+    `aws-cdk@^${cdkVersion}`,
     '@types/js-yaml',
     '@types/lodash.merge',
     '@types/crypto-js',
