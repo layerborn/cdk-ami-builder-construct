@@ -18,7 +18,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -46,7 +46,7 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: 18.0.0
       - name: Install dependencies
@@ -62,11 +62,10 @@ jobs:
         continue-on-error: true
       - name: Upload artifact
         if: ${{ steps.git_remote.outputs.latest_commit == github.sha }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: build-artifact
           path: dist
-          overwrite: true
   release_github:
     name: Publish to GitHub Releases
     needs: release
@@ -76,11 +75,11 @@ jobs:
       id-token: write
     if: needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v3
         with:
           node-version: 18.0.0
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: build-artifact
           path: dist
@@ -102,15 +101,15 @@ jobs:
     needs: release
     runs-on: ubuntu-latest
     permissions:
-      id-token: write
       contents: read
-    if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
+      id-token: write
+    if: needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v3
         with:
           node-version: 18.0.0
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: build-artifact
           path: dist
@@ -149,7 +148,6 @@ jobs:
         env:
           NPM_DIST_TAG: latest
           NPM_REGISTRY: registry.npmjs.org
-          NPM_CONFIG_PROVENANCE: true
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx -p publib@latest publib-npm
   release_pypi:
@@ -161,14 +159,14 @@ jobs:
       id-token: write
     if: needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v3
         with:
           node-version: 18.0.0
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v4
         with:
           python-version: 3.x
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: build-artifact
           path: dist
@@ -217,14 +215,14 @@ jobs:
       id-token: write
     if: needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v3
         with:
           node-version: 18.0.0
       - uses: actions/setup-go@v3
         with:
           go-version: ^1.16.0
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: build-artifact
           path: dist

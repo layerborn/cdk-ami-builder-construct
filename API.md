@@ -2361,6 +2361,7 @@ const checkStateMachineStatusFunctionProps: CheckStateMachineStatusFunctionProps
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.functionName">functionName</a></code> | <code>string</code> | A name for the function. |
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.initialPolicy">initialPolicy</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | Initial policy statements to add to the created Lambda Role. |
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.insightsVersion">insightsVersion</a></code> | <code>aws-cdk-lib.aws_lambda.LambdaInsightsVersion</code> | Specify the version of CloudWatch Lambda insights to use for monitoring. |
+| <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.ipv6AllowedForDualStack">ipv6AllowedForDualStack</a></code> | <code>boolean</code> | Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets. |
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.layers">layers</a></code> | <code>aws-cdk-lib.aws_lambda.ILayerVersion[]</code> | A list of layers to add to the function's execution environment. |
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.logFormat">logFormat</a></code> | <code>string</code> | Sets the logFormat for the function. |
 | <code><a href="#@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.loggingFormat">loggingFormat</a></code> | <code>aws-cdk-lib.aws_lambda.LoggingFormat</code> | Sets the loggingFormat for the function. |
@@ -2717,6 +2718,21 @@ public readonly insightsVersion: LambdaInsightsVersion;
 Specify the version of CloudWatch Lambda insights to use for monitoring.
 
 > [https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Lambda-Insights-Getting-Started-docker.html](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Lambda-Insights-Getting-Started-docker.html)
+
+---
+
+##### `ipv6AllowedForDualStack`<sup>Optional</sup> <a name="ipv6AllowedForDualStack" id="@layerborn/cdk-ami-builder.CheckStateMachineStatusFunctionProps.property.ipv6AllowedForDualStack"></a>
+
+```typescript
+public readonly ipv6AllowedForDualStack: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets.
+
+Only used if 'vpc' is supplied.
 
 ---
 
@@ -3408,6 +3424,7 @@ const startStateMachineFunctionProps: StartStateMachineFunctionProps = { ... }
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.functionName">functionName</a></code> | <code>string</code> | A name for the function. |
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.initialPolicy">initialPolicy</a></code> | <code>aws-cdk-lib.aws_iam.PolicyStatement[]</code> | Initial policy statements to add to the created Lambda Role. |
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.insightsVersion">insightsVersion</a></code> | <code>aws-cdk-lib.aws_lambda.LambdaInsightsVersion</code> | Specify the version of CloudWatch Lambda insights to use for monitoring. |
+| <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.ipv6AllowedForDualStack">ipv6AllowedForDualStack</a></code> | <code>boolean</code> | Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets. |
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.layers">layers</a></code> | <code>aws-cdk-lib.aws_lambda.ILayerVersion[]</code> | A list of layers to add to the function's execution environment. |
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.logFormat">logFormat</a></code> | <code>string</code> | Sets the logFormat for the function. |
 | <code><a href="#@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.loggingFormat">loggingFormat</a></code> | <code>aws-cdk-lib.aws_lambda.LoggingFormat</code> | Sets the loggingFormat for the function. |
@@ -3764,6 +3781,21 @@ public readonly insightsVersion: LambdaInsightsVersion;
 Specify the version of CloudWatch Lambda insights to use for monitoring.
 
 > [https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Lambda-Insights-Getting-Started-docker.html](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Lambda-Insights-Getting-Started-docker.html)
+
+---
+
+##### `ipv6AllowedForDualStack`<sup>Optional</sup> <a name="ipv6AllowedForDualStack" id="@layerborn/cdk-ami-builder.StartStateMachineFunctionProps.property.ipv6AllowedForDualStack"></a>
+
+```typescript
+public readonly ipv6AllowedForDualStack: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets.
+
+Only used if 'vpc' is supplied.
 
 ---
 
