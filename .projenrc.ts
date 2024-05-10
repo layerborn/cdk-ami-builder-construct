@@ -60,7 +60,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ],
   githubOptions: {
     mergify: true,
-    pullRequestLint: true,
+    pullRequestLint: false,
     projenCredentials: GithubCredentials.fromApp({
       permissions: {
         pullRequests: github.workflows.AppPermission.WRITE,
