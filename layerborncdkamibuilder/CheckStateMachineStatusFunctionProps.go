@@ -143,6 +143,12 @@ type CheckStateMachineStatusFunctionProps struct {
 	// Default: - No Lambda Insights.
 	//
 	InsightsVersion awslambda.LambdaInsightsVersion `field:"optional" json:"insightsVersion" yaml:"insightsVersion"`
+	// Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets.
+	//
+	// Only used if 'vpc' is supplied.
+	// Default: false.
+	//
+	Ipv6AllowedForDualStack *bool `field:"optional" json:"ipv6AllowedForDualStack" yaml:"ipv6AllowedForDualStack"`
 	// A list of layers to add to the function's execution environment.
 	//
 	// You can configure your Lambda function to pull in
@@ -155,6 +161,10 @@ type CheckStateMachineStatusFunctionProps struct {
 	// Default: "Text".
 	//
 	LogFormat *string `field:"optional" json:"logFormat" yaml:"logFormat"`
+	// Sets the loggingFormat for the function.
+	// Default: LoggingFormat.TEXT
+	//
+	LoggingFormat awslambda.LoggingFormat `field:"optional" json:"loggingFormat" yaml:"loggingFormat"`
 	// The log group the function sends logs to.
 	//
 	// By default, Lambda functions send logs to an automatically created default log group named /aws/lambda/\<function name\>.

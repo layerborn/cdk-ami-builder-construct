@@ -14,7 +14,7 @@ import (
 	layerborncdkiampolicybuilderhelper "github.com/layerborn/cdk-iam-policy-builder-helper-construct/layerborncdkiampolicybuilderhelper/jsii"
 )
 
-//go:embed layerborn-cdk-ami-builder-0.0.5.tgz
+//go:embed layerborn-cdk-ami-builder-0.0.6.tgz
 var tarball []byte
 
 // Initialize loads the necessary packages in the @jsii/kernel to support the enclosing module.
@@ -26,5 +26,5 @@ func Initialize() {
 	constructs.Initialize()
 
 	// Load this library into the kernel
-	_jsii_.Load("@layerborn/cdk-ami-builder", "0.0.5", tarball)
+	_jsii_.Load("@layerborn/cdk-ami-builder", "0.0.6", tarball)
 }
