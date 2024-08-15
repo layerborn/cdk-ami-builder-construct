@@ -290,7 +290,7 @@ export class ImagePipeline extends Construct {
     const distributionRegions = props.distributionRegions ?? [];
 
     if ((props.distributionRegions?.length === 0 && props.distributionAccountIds?.length) ||
-            (props.distributionRegions?.length && props.distributionAccountIds?.length === 0)) {
+      (props.distributionRegions?.length && props.distributionAccountIds?.length === 0)) {
       throw new Error('distributionRegions must be specified if distributionAccountIds is specified');
     }
 
