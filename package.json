@@ -79,7 +79,7 @@
     "@aws-sdk/client-ec2": "^3.574.0",
     "@aws-sdk/client-ecs": "^3.574.0",
     "@aws-sdk/client-kms": "^3.574.0",
-    "@aws-sdk/client-s3": "^3.574.0",
+    "@aws-sdk/client-s3": "^3.633.0",
     "@aws-sdk/client-secrets-manager": "^3.574.0",
     "@aws-sdk/client-sfn": "^3.574.0",
     "@aws-sdk/client-sns": "^3.574.0",
